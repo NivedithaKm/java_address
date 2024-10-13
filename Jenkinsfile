@@ -1,15 +1,15 @@
 pipeline {
     agent any
     tools {
-        maven "Maven"
+        maven "Mymaven"
     }
    environment {
-    DOCKERHUB_CREDENTIALS = credentials('docker-hub-sonuk2911')
+    DOCKERHUB_CREDENTIALS = credentials('docker-hub-niveditha052')
     }
     stages {
         stage('SCM Checkout') {
             steps{
-            git 'https://github.com/ulchatur/java_address.git'
+            git 'https://github.com/NivedithaKm/java_address.git'
             }
         }
         stage ('Maven Build') {
@@ -20,7 +20,7 @@ pipeline {
 
         stage('Build docker image') {
             steps {  
-                sh 'docker build -t sonuk2911/javaapp:$BUILD_NUMBER .'
+                sh 'docker build -t niveditha052/cicd:$BUILD_NUMBER .'
             }
         }
         stage('login to dockerhub') {
@@ -30,7 +30,7 @@ pipeline {
         }
         stage('push image') {
             steps{
-                sh 'docker push sonuk2911/javaapp:$BUILD_NUMBER'
+                sh 'docker push niveditha052/cicd:$BUILD_NUMBER'
             }
         }
 }
